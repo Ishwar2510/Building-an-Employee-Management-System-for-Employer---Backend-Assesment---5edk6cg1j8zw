@@ -75,10 +75,10 @@ const deleteEmployee = async (req, res) => {
     let data = await Employee.deleteMany({salary:{$gt:10000}});
     
     if (data.deletedCount>0){
-      res.json({message:"employees delted successfully"})
+      res.json({message:"employees deleted successfully"})
       return;
     }
-    res.status(404).json({error:"No emplyess found"})
+    res.status(404).json({error:"No employees found"})
     
 
   } catch (err) {

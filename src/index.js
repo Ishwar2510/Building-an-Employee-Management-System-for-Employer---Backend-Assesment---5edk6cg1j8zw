@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 dotenv.config();
 
+
 //connect to DB
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);

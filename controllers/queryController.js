@@ -8,13 +8,15 @@ const filterQueries = async (req, res) => {
     // Formulae to implementing pagination: (page - 1) * limit
     // For Sorting use    .sort('salary')
     const {page,limit} = req.query
+    
+   
     if(!page){
       page =1
     }
     if(!limit){
       limit =5;
     }
-    let data = await Employee.find().sort({salary:1}).limit(limit)
+    let data = await Employee.find().sort({salary:1}).limit(+page *+limit)
     res.json(data)
   } catch (err) {
     console.error(err);

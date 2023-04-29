@@ -6,7 +6,9 @@ const createEmployee = async (req, res) => {
   try {
     
     // Write a code here to store Employee data
+   console.log(req.url)
     let {firstName, lastName,companyName,email,salary} = req.body
+    
     let newEmp = new Employee({
       firstName,
       lastName,
@@ -14,17 +16,18 @@ const createEmployee = async (req, res) => {
       email,
       salary}
     )
-    console.log(newEmp)
+   
     let data = await newEmp.save();
     res.status(201).json(data)
   } catch (err) {
-    console.log(err)
+    
     res.status(500).json({ error: 'Failed to create employee' });
   }
 };
 
 //Get Employee From a Particular id
 const getEmployee = async (req, res) => {
+ console.log(req.url)
   try {
     // Write a code here to get Employee from a Particular id
     let id = req.params.id
@@ -41,6 +44,7 @@ const getEmployee = async (req, res) => {
 
 //Updating Employee
 const updateEmployee = async (req, res) => {
+ console.log(req.url)
   try {
     //Write a code here for updating Employee details using 'PUT' request
     let id = req.params.id
@@ -65,10 +69,11 @@ const updateEmployee = async (req, res) => {
 };
 
 const deleteEmployee = async (req, res) => {
+ console.log(req.url)
   try {
     //Write a code here for Deleting all the employees whose salary is greater than 10000
     let data = await Employee.deleteMany({salary:{$gt:10000}});
-    console.log(data.deletedCount)
+    
     if (data.deletedCount>0){
       res.json({message:"employees delted successfully"})
       return;

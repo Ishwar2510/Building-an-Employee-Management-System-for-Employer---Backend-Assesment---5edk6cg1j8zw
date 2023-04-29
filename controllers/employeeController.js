@@ -18,7 +18,7 @@ const createEmployee = async (req, res) => {
     )
    
     let data = await newEmp.save();
-    res.status(201).json(data)
+    res.status(201).json({newEmployee:data})
   } catch (err) {
     
     res.status(500).json({ error: 'Failed to create employee' });

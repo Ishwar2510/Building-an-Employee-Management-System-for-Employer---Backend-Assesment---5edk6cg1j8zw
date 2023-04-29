@@ -2,19 +2,23 @@ const Employee = require('../models/employeeModel');
 
 //Registering Employee into database
 const createEmployee = async (req, res) => {
+ 
   try {
+    
     // Write a code here to store Employee data
     let {firstName, lastName,companyName,email,salary} = req.body
-    let newEmp = new Employee(
+    let newEmp = new Employee({
       firstName,
       lastName,
       companyName,
       email,
-      salary
+      salary}
     )
+    console.log(newEmp)
     let data = await newEmp.save();
-    res.json(data)
+    res.status(201).json(data)
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: 'Failed to create employee' });
   }
 };
@@ -64,7 +68,8 @@ const deleteEmployee = async (req, res) => {
   try {
     //Write a code here for Deleting all the employees whose salary is greater than 10000
     let data = await Employee.deleteMany({salary:{$gt:10000}});
-    if (data.length>0){
+    console.log(data.deletedCount)
+    if (data.deletedCount>0){
       res.json({message:"employees delted successfully"})
       return;
     }
